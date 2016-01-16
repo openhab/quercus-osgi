@@ -124,3 +124,5 @@ Export-Package: com.caucho,
  com.caucho.xpath.functions,
  com.caucho.xpath.pattern
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: javax.servlet,
+ javax.servlet.http
