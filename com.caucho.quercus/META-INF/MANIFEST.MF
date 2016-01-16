@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Quercus PHP5 Implementation
 Bundle-SymbolicName: com.caucho.quercus
 Bundle-Version: 4.0.39
-Bundle-ClassPath: quercus.jar
+Bundle-ClassPath: .,lib/quercus.jar
 Export-Package: com.caucho,
  com.caucho.bytecode,
  com.caucho.config,
