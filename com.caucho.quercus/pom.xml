@@ -14,6 +14,18 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestFile>META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+          <includes>
+                <include>lib/quercus.jar</include>
+              </includes>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <distributionManagement>
