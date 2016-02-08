@@ -1,3 +1,0 @@
-#!/bin/bash
-
-jar cvfm quercus-4.0.39-bundle.jar META-INF/MANIFEST.MF lib/quercus.jar
