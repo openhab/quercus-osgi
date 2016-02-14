@@ -1,66 +1,60 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.openhab</groupId>
-	<artifactId>com.caucho.quercus</artifactId>
-	<version>1.0.0</version>
-	<name>Repackaged Caucho Quercus PHP5 runtime</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<quercus.version>4.0.45</quercus.version>
-	</properties>
+  <groupId>org.openhab</groupId>
+  <artifactId>com.caucho.quercus</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>
 
-	<build>
-		<plugins>
+  <name>Repackaged Caucho Quercus PHP5 runtime</name>
+
+  <properties>
+    <quercus.version>4.0.45</quercus.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.caucho</groupId>
+      <artifactId>quercus</artifactId>
+      <version>${quercus.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.3</version>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>3.0.1</version>
+        <extensions>true</extensions>
         <configuration>
-        	<shadedArtifactAttached>false</shadedArtifactAttached>
+          <!-- You could uncomment next line for better PDE integration -->
+          <!--<manifestLocation>META-INF</manifestLocation>-->
+          <instructions>
+            <Bundle-Vendor>openHAB</Bundle-Vendor>
+            <Bundle-ClassPath>.</Bundle-ClassPath>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
+            <Embed-Dependency>quercus;scope=compile|runtime;inline=true</Embed-Dependency>
+            <Import-Package>
+              *;resolution:=optional
+            </Import-Package>
+            <Export-Package>*;version="${quercus.version}"</Export-Package>
+          </instructions>
         </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-          <archive>
-            <manifestEntries>
-              <Bundle-Vendor>openHAB</Bundle-Vendor>
-              <Bundle-ClassPath>.</Bundle-ClassPath>
-              <Bundle-Version>${project.version}</Bundle-Version>
-              <Bundle-Name>${project.name}</Bundle-Name>
-              <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-              <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
-              <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
-              <Export-Package>*</Export-Package>
-            </manifestEntries>
-          </archive>
-        </configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<distributionManagement>
-		<repository>
-			<id>bintray</id>
-			<name>openhab-mvn</name>
-			<url>https://api.bintray.com/maven/openhab/mvn/quercus-osgi/;publish=1</url>
-		</repository>
-	</distributionManagement>
-	<dependencies>
-		<dependency>
-			<groupId>com.caucho</groupId>
-			<artifactId>quercus</artifactId>
-			<version>${quercus.version}</version>
-		</dependency>
-	</dependencies>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>bintray</id>
+      <name>openhab-mvn</name>
+      <url>https://api.bintray.com/maven/openhab/mvn/quercus-osgi/;publish=1</url>
+    </repository>
+  </distributionManagement>
+
 </project>
