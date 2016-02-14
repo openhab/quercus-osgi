@@ -3,39 +3,49 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openhab</groupId>
 	<artifactId>com.caucho.quercus</artifactId>
-	<version>4.0.45</version>
-	<name>Caucho Quercus PHP5 runtime</name>
+	<version>1.0.0</version>
+	<name>Repackaged Caucho Quercus PHP5 runtime</name>
+
+	<properties>
+		<quercus.version>4.0.45</quercus.version>
+	</properties>
+
 	<build>
 		<plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+        	<shadedArtifactAttached>false</shadedArtifactAttached>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<archive>
-						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.4</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-	                   <Export-Package>*</Export-Package>
-	                </instructions>
-                 </configuration>
-				<executions>
-					<execution>
-				      <id>bundle-manifest</id>
-				      <phase>process-classes</phase>
-				      <goals>    
-				        <goal>manifest</goal>
-				      </goals>   
-				    </execution>
-			    </executions>
+          <archive>
+            <manifestEntries>
+              <Bundle-Vendor>openHAB</Bundle-Vendor>
+              <Bundle-ClassPath>.</Bundle-ClassPath>
+              <Bundle-Version>${project.version}</Bundle-Version>
+              <Bundle-Name>${project.name}</Bundle-Name>
+              <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+              <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
+              <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
+              <Export-Package>*</Export-Package>
+            </manifestEntries>
+          </archive>
+        </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -47,10 +57,10 @@
 		</repository>
 	</distributionManagement>
 	<dependencies>
-        <dependency>
-        	<groupId>org.vx68k.quercus</groupId>
-        	<artifactId>quercus</artifactId>
-        	<version>4.0.42-MOD3</version>
-        </dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>quercus</artifactId>
+			<version>${quercus.version}</version>
+		</dependency>
 	</dependencies>
 </project>
