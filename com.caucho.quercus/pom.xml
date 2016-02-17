@@ -4,7 +4,7 @@
 
   <groupId>org.openhab</groupId>
   <artifactId>com.caucho.quercus</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>4.0.45</version>
   <packaging>bundle</packaging>
 
   <name>Repackaged Caucho Quercus PHP5 runtime</name>
@@ -33,8 +33,6 @@
           <!--<manifestLocation>META-INF</manifestLocation>-->
           <instructions>
             <Bundle-Vendor>openHAB</Bundle-Vendor>
-            <Bundle-ClassPath>.</Bundle-ClassPath>
-            <Bundle-Version>${project.version}</Bundle-Version>
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
             <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
